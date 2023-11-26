@@ -221,7 +221,7 @@ class LoneWolfAgent(DefaultParty):
         their_utility = self.opponent_model.get_predicted_utility(bid)
 
         # # The circle ends at x = radius + x0, so any x greater than the radius is "outside"
-        return our_utility > (decaying_radius + self.circle_center[0]) or their_utility > (sqrt((pow(decaying_radius, 2) - pow(float(our_utility) + float(circle_center[0]), 2))) + float(self.circle_center[1]))
+        return our_utility > (decaying_radius + self.circle_center[0]) or their_utility > (sqrt((pow(decaying_radius, 2) - pow(float(our_utility) + float(self.circle_center[0]), 2))) + float(self.circle_center[1]))
     
     def find_bid(self) -> Bid:
         # compose a list of all possible bids
