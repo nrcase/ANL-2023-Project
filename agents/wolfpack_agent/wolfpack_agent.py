@@ -49,10 +49,19 @@ class WolfpackAgent(DefaultParty):
         self.settings: Settings = None
         self.storage_dir: str = None
 
+        # Keeping track of the best bid over the course of
+        # the whole negotiation session
         self.best_bid_score = 0.0
         self.best_bid = None
-        # The point where we will start considering bids
+        # The point where we will start considering bids (t0)
         self.consideration_time = 0.65
+        # The rate of decay for the radius (k)
+        self.decay_constant = 0.75
+        # The y/x value that intercepts x=1 or y=1 (b)
+        # (if x0, y0 is at the origin) 
+        self.initial_square_intercept = 0.85
+        # The center of the semicircle
+        self.circle_center = (0, 0)
 
         self.last_received_bid: Bid = None
         self.opponent_model: OpponentModel = None
@@ -189,10 +198,6 @@ class WolfpackAgent(DefaultParty):
         with open(f"{self.storage_dir}/data.md", "w") as f:
             f.write(data)
 
-    ###########################################################################################
-    ################################## Example methods below ##################################
-    ###########################################################################################
-
     def accept_condition(self, bid: Bid) -> bool:
         if bid is None:
             return False
@@ -207,26 +212,14 @@ class WolfpackAgent(DefaultParty):
         # Approach creates a very crude idea of the pareto curve for the domain
         # using a quarter circle. 
 
-        # This determines the amount of decay that occurs. Values between (0, 1)
-        # where lower == more decay and therefore more consilaton.
-        decay_constant = 0.75
-        # The x value in which the circle intersects the line y=1 at t=consideration_time
-        # and the y value in which the circle intersects the line x=1 at t=consideration_time
-        initial_square_incercept = 0.85
-
-        decaying_radius = sqrt(1+ pow(initial_square_incercept, 2)) * pow(decay_constant, (progress-self.consideration_time)/(1-self.consideration_time))
+        # Our equation for r
+        decaying_radius = sqrt(1+ pow(self.initial_square_intercept, 2)) * pow(self.decay_constant, (progress-self.consideration_time)/(1-self.consideration_time))
+        # Our utility is x and theirs is y
         our_utility = self.profile.getUtility(bid)
         their_utility = self.opponent_model.get_predicted_utility(bid)
 
-        # print(our_utility, their_utility, progress)
-        # print(sqrt((pow(decaying_radius, 2) - pow(float(our_utility), 2))))
-        # print(decaying_radius)
-        
-        # print(our_utility > decaying_radius or their_utility > sqrt((pow(decaying_radius, 2) - pow(float(our_utility), 2))),)
-        # print(self.progress.get(time() * 1000))
-
-        # # The circle ends at x = radius, so any x greater than the radius is "outside"
-        return our_utility > decaying_radius or their_utility > sqrt((pow(decaying_radius, 2) - pow(float(our_utility), 2)))
+        # # The circle ends at x = radius + x0, so any x greater than the radius is "outside"
+        return our_utility > (decaying_radius + self.circle_center[0]) or their_utility > (sqrt((pow(decaying_radius, 2) - pow(float(our_utility) + float(circle_center[0]), 2))) + float(self.circle_center[1]))
 
     def find_bid(self) -> Bid:
         # compose a list of all possible bids
