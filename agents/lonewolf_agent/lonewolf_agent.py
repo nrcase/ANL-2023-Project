@@ -31,7 +31,7 @@ from tudelft_utilities_logging.ReportToLogger import ReportToLogger
 from .utils.opponent_model import OpponentModel
 
 
-class WolfpackAgent(DefaultParty):
+class LoneWolfAgent(DefaultParty):
     """
     Template of a Python geniusweb agent.
     """
@@ -52,7 +52,7 @@ class WolfpackAgent(DefaultParty):
         self.best_bid_score = 0.0
         self.best_bid = None
         # The point where we will start considering bids
-        self.consideration_time = 0.65
+        self.consideration_time = 0.75
 
         self.last_received_bid: Bid = None
         self.opponent_model: OpponentModel = None
@@ -209,10 +209,11 @@ class WolfpackAgent(DefaultParty):
 
         # This determines the amount of decay that occurs. Values between (0, 1)
         # where lower == more decay and therefore more consilaton.
-        decay_constant = 0.75
+        decay_constant = 0.65
         # The x value in which the circle intersects the line y=1 at t=consideration_time
         # and the y value in which the circle intersects the line x=1 at t=consideration_time
         initial_square_incercept = 0.85
+        circle_center = (-0.45, 0.25)
 
         decaying_radius = sqrt(1+ pow(initial_square_incercept, 2)) * pow(decay_constant, (progress-self.consideration_time)/(1-self.consideration_time))
         our_utility = self.profile.getUtility(bid)
@@ -226,7 +227,7 @@ class WolfpackAgent(DefaultParty):
         # print(self.progress.get(time() * 1000))
 
         # # The circle ends at x = radius, so any x greater than the radius is "outside"
-        return our_utility > decaying_radius or their_utility > sqrt((pow(decaying_radius, 2) - pow(float(our_utility), 2)))
+        return our_utility > (decaying_radius + circle_center[0]) or their_utility > (sqrt((pow(decaying_radius, 2) - pow(float(our_utility)+float(circle_center[0]), 2))) + float(circle_center[1]))
 
     def find_bid(self) -> Bid:
         # compose a list of all possible bids
