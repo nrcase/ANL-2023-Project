@@ -1,10 +1,10 @@
 import os
 import pandas as pd
 
-control_folder = "./control/"
-wolfpack_folder = "./wolfpack/"
-lonewolf_folder = "./lonewolf/"
-summary_output = "./summary.xlsx"
+control_folder = "./project-results/control/"
+wolfpack_folder = "./project-results/wolfpack/"
+lonewolf_folder = "./project-results/lonewolf/"
+summary_output = "./project-results/summary.xlsx"
 
 def combine_results(label, data_directory):
     # For all csvs in folder, read them into a separate df
