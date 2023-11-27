@@ -40,5 +40,6 @@ print(lonewolf_data)
 
 # Output summmary data for all tournament types
 summary_data = pd.concat([control_data.mean(), control_data.std(), lonewolf_data.mean(), lonewolf_data.std(), wolfpack_data.mean(), wolfpack_data.std()], axis=1)
+summary_data = summary_data.round(3)
 summary_data.columns = ['Control Mean', 'Control std', 'LoneWolfAgent Mean', 'LoneWolfAgent std', 'WolfpackAgent Mean', 'WolfpackAgent std']
 summary_data.to_excel(summary_output)
