@@ -1,4 +1,4 @@
-# 455 R3 README
+# 455/555 R3 README
 Follow the instructions in this README to recreate the data found inside of Wheelin’ and Dealin’: Automated Negotiation Agents.
 
 ## Overview
