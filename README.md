@@ -23,8 +23,14 @@ Our report is based on the results from 15 total tournaments (5 tournaments per 
 
 To recreate this data with new tournament runs, you must run the `run_*_tournament` for each of the tournament types (`control`, `wolfpack`, and `lonewolf`) 5 times a piece. Note that each tournament takes about 80 minutes a piece, so creating this data will take about 20 hours total. Given these results, extract the `tournament_results_summary.csv` file from `/results/*` folders and use them to update the `/project-results/<type>/run*.csv` files. Run `/project-results/digest_data.py` with the new `/project-results` data to create a `summary.xlsx` file with the cumulative average of all results for each tournament type, as described above.
 
-## Final Report Link
+## Final Report
+https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/Project%20R3.pdf
 
-## Final Presentation Link
+### Data gathered and summarized in our final report
+https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/summary-data-averages.xlsx
 
-## Grad Section Paper Link (nrcase)
+## Final Presentation 
+https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/Wheelin%20and%20Dealin%20Presentation.pdf
+
+## Grad Section Term Paper (nrcase)
+https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/CSC555%20Term%20Paper.pdf
