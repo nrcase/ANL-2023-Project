@@ -26,7 +26,7 @@ To recreate this data with new tournament runs, you must run the `run_*_tourname
 ## Final Report
 https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/Project%20R3.pdf
 
-## Data gathered and summarized in our final report
+## Data Gathered
 https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/summary-data-averages.xlsx
 
 ## Final Presentation 
