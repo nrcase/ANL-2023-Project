@@ -1,4 +1,4 @@
-# 455/555 R3 README
+# SCDAI README
 Follow the instructions in this README to recreate the data found inside of Wheelin’ and Dealin’: Automated Negotiation Agents.
 
 ## Overview
@@ -26,7 +26,7 @@ To recreate this data with new tournament runs, you must run the `run_*_tourname
 ## Final Report
 https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/Project%20R3.pdf
 
-## Data Gathered
+## Data from the Report
 https://github.com/nrcase/SCDAI-Term-Project/blob/main/docs/summary-data-averages.xlsx
 
 ## Final Presentation 
